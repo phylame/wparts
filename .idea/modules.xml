@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ProjectModuleManager">
+    <modules>
+      <module fileurl="file://$PROJECT_DIR$/wparts.iml" filepath="$PROJECT_DIR$/wparts.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/wparts_main.iml" filepath="$PROJECT_DIR$/.idea/modules/wparts_main.iml" group="wparts" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/wparts_test.iml" filepath="$PROJECT_DIR$/.idea/modules/wparts_test.iml" group="wparts" />
+    </modules>
+  </component>
+</project>

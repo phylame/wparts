@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ehcache>
+    <diskStore path="java.io.tmpdir/ehcache"/>
+    <defaultCache maxElementsInMemory="256" overflowToDisk="true" timeToIdleSeconds="60" timeToLiveSeconds="300"/>
+    <cache name="post" maxElementsInMemory="64" timeToIdleSeconds="300" timeToLiveSeconds="600"/>
+    <cache name="tag" maxElementsInMemory="128" timeToIdleSeconds="60" timeToLiveSeconds="120"/>
+</ehcache>
