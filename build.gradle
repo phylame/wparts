@@ -1,7 +1,7 @@
 buildscript {
     ext {
-        kotlinVersion = '1.2.10'
-        springBootVersion = '2.0.0.M7'
+        kotlinVersion = '1.2.21'
+        springBootVersion = '2.0.0.RC1'
     }
     repositories {
         jcenter()
@@ -40,8 +40,6 @@ repositories {
 
 dependencies {
     compile 'org.jetbrains.kotlin:kotlin-stdlib-jdk8'
-    compile "org.jetbrains.kotlin:kotlin-stdlib:$kotlinVersion"
-    compile "org.jetbrains.kotlin:kotlin-reflect:$kotlinVersion"
     compile 'com.fasterxml.jackson.module:jackson-module-kotlin'
 
     runtime 'org.springframework.boot:spring-boot-devtools'
@@ -54,7 +52,5 @@ dependencies {
 
     compile 'org.springframework.boot:spring-boot-starter-thymeleaf'
     compile 'org.springframework.boot:spring-boot-starter-undertow'
-    compile('org.springframework.boot:spring-boot-starter-web') {
-        exclude module: 'spring-boot-starter-tomcat'
-    }
+    compile 'org.springframework.boot:spring-boot-starter-web'
 }
