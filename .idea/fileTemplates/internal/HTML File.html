@@ -3,12 +3,23 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-  <link rel="stylesheet" th:href="@{/asset/bootstrap/css/bootstrap.min.css}">
+  <link rel="icon" href="../../static/favicon.ico" th:href="@{/favicon.ico}">
+
+  <!-- Bootstrap CSS -->
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
+        th:href="@{/asset/bootstrap/css/bootstrap.min.css}">
+
   <title>#[[$Title$]]#</title>
 </head>
 <body>
 #[[$END$]]#
-<script th:src="@{/asset/jquery/jquery.min.js}"></script>
-<script th:src="@{/asset/bootstrap/js/bootstrap.bundle.min.js}"></script>
+<!-- Optional JavaScript -->
+<!-- jQuery first, then Popper.js, then Bootstrap JS -->
+<script src="https://code.jquery.com/jquery-3.3.1.min.js"
+        th:src="@{/asset/jquery/jquery.min.js}"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.bundle.min.js"
+        th:src="@{/asset/bootstrap/js/bootstrap.bundle.min.js}"></script>
+<script src="https://use.fontawesome.com/releases/v5.0.6/js/all.js"
+        th:src="@{/asset/font-awesome/svg-with-js/js/fontawesome-all.js}"></script>
 </body>
 </html>

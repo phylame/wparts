@@ -1,0 +1,86 @@
+html {
+    position: relative;
+    min-height: 100%;
+}
+
+body {
+    /* margin for navbar and footer */
+    margin-top: 2.7rem;
+    margin-bottom: 2.5rem;
+}
+
+#navbar {
+    /* make navbar thinner */
+    padding-top: .1rem;
+    padding-bottom: .1rem;
+    border-bottom: 1px solid #F0F0F0;
+    background-color: #FFF;
+}
+
+#pathbar {
+    margin: 0;
+    /* make breadcrumb thinner */
+    padding-left: 0;
+    padding-right: 0;
+    padding-bottom: 0;
+    background-color: transparent;
+}
+
+#sidebar > * {
+    margin-bottom: 1rem;
+}
+
+#sidebar > *:first-child {
+    margin-top: 1rem;
+}
+
+#sidebar > .card > .card-header {
+    padding: .5rem;
+    font-size: 1.1rem;
+    font-weight: 600;
+}
+
+#sidebar > .card > .card-header > .badge {
+    margin-left: .25rem;
+}
+
+#sidebar > .card > .card-footer {
+    border: none;
+    padding: .5rem;
+    font-size: .9rem;
+}
+
+#sidebar > .card > .list-group > .list-group-item {
+    padding: .5rem .6rem;
+}
+
+#sidebar > .card > .list-group > .list-group-item > a {
+    font-size: .8rem;
+    font-weight: 600;
+}
+
+#footer {
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+    /* fixed height of the footer here */
+    height: 2.5rem;
+    line-height: 2.5rem;
+    color: #2A2A2A;
+    background-color: #FAFAFA;
+    border-top: 1px solid #EDEDED;
+}
+
+.rounded-left-0 {
+    border-top-left-radius: 0;
+    border-bottom-left-radius: 0;
+}
+
+.rounded-right-0 {
+    border-top-right-radius: 0;
+    border-bottom-right-radius: 0;
+}
+
+[v-cloak] {
+    display: none;
+}

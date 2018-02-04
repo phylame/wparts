@@ -54,5 +54,8 @@ dependencies {
     compile 'org.springframework.boot:spring-boot-starter-thymeleaf'
 
     compile 'org.webjars:webjars-locator'
+
+    compile 'org.webjars:vue:2.5.13'
     compile 'org.webjars:bootstrap:4.0.0'
+    compile 'org.webjars:font-awesome:5.0.6'
 }

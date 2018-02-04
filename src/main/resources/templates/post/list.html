@@ -3,27 +3,148 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-
-  <!-- Bootstrap CSS -->
-  <link rel="stylesheet" th:href="@{/asset/bootstrap/css/bootstrap.min.css}">
-
+  <link rel="icon" href="../../static/favicon.ico" th:href="@{/favicon.ico}">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
+        th:href="@{/asset/bootstrap/css/bootstrap.min.css}">
+  <link rel="stylesheet" href="../../static/css/main.css" th:href="@{/css/main.css}">
+  <link rel="stylesheet" href="../../static/css/post.css" th:href="@{/css/post.css}">
   <title>Hello, world!</title>
 </head>
 <body>
-<h1>Hello, world!</h1>
-<ul>
-  <li class="card-body" th:each="post: ${posts}">
-
-  </li>
-</ul>
-<ul>
-  <li th:each="tag: ${tags}">
-    [[${tag.id}]] - [[${tag.name}]]
-  </li>
-</ul>
-<!-- Optional JavaScript -->
-<!-- jQuery first, then Popper.js, then Bootstrap JS -->
-<script th:src="@{/asset/jquery/jquery.min.js}"></script>
-<script th:src="@{/asset/bootstrap/js/bootstrap.bundle.min.js}"></script>
+<header>
+  <nav class="navbar navbar-expand-sm fixed-top navbar-light" id="navbar">
+    <div class="container">
+      <a class="navbar-brand" href="#" th:href="@{/}">WPArts</a>
+      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarCollapse"
+              aria-controls="navbarCollapse" aria-expanded="false" aria-label="打开导航条">
+        <i class="fas fa-bars" aria-hidden="true"></i>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarCollapse">
+        <ul class="navbar-nav mr-auto">
+          <li class="nav-item">
+            <a class="nav-link" href="#" th:href="@{/}">首页</a>
+          </li>
+          <li class="nav-item active">
+            <a class="nav-link" href="#" th:href="@{/post}">文章<span class="sr-only">(当前选项)</span></a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="#" th:href="@{/book}">小说</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="#" th:href="@{/app}">应用</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="#" th:href="@{/about}">关于</a>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+  <nav class="container d-none d-sm-block" aria-label="Breadcrumb">
+    <ol class="breadcrumb text-muted" id="pathbar">
+      <li class="breadcrumb-item">
+        <i class="fas fa-home" aria-hidden="true"></i>
+        <a href="#" th:href="@{/}">首页</a>
+      </li>
+      <li class="breadcrumb-item active" aria-current="page">文章</li>
+    </ol>
+  </nav>
+</header>
+<main role="main" class="container">
+  <div class="row">
+    <div class="col-lg-8">
+    </div>
+    <aside class="col-lg-4" id="sidebar">
+      <form>
+        <div class="input-group">
+          <input type="text" class="form-control" required placeholder="Search for posts"/>
+          <span class="input-group-btn">
+            <button class="btn btn-secondary rounded-left-0" type="submit">
+              <i class="fa fa-search" aria-hidden="true"></i>
+            </button>
+          </span>
+        </div>
+      </form>
+      <div class="card" id="quick-posts">
+        <div class="card-header text-center">
+          <div class="btn-group btn-group-toggle" data-toggle="buttons">
+            <button class="btn-sm btn btn-secondary" :class="{active: activated === 'popular'}"
+                    @click.stop="loadPosts('popular')">热门文章
+            </button>
+            <button class="btn-sm btn btn-secondary" :class="{active: activated === 'recent'}"
+                    @click.stop="loadPosts('recent')">最新发布
+            </button>
+            <button class="btn-sm btn btn-secondary" :class="{active: activated === 'random'}"
+                    @click.stop="loadPosts('random')">随便看看
+            </button>
+          </div>
+        </div>
+        <ul class="list-group list-group-flush" v-if="posts">
+          <li class="list-group-item list-group-item-action" v-for="post in posts">
+            <a :href="'/post/' + post.id" v-text="post.title"></a>
+          </li>
+        </ul>
+        <div class="card-body text-center" v-else v-cloak>（无内容）</div>
+      </div>
+      <div class="card" id="category-list">
+        <h5 class="card-header">分类<span class="badge badge-pill badge-dark" v-text="count"></span></h5>
+        <template v-if="items.length">
+          <ul class="list-group list-group-flush">
+            <li class="list-group-item list-group-item-action" v-for="item in items">
+              <a class="clearfix" :href="'/post?category=' + item.id">
+                <span class="float-left" v-text="item.name"></span>
+                <span class="float-right badge badge-pill badge-secondary" v-text="item.posts"></span>
+              </a>
+            </li>
+          </ul>
+          <button class="card-footer btn btn-link text-left" :disabled="loading" @click.stop="loadMore"
+                  v-if="items.length < count" v-cloak>
+            <i class="fas fa-sync fa-spin fa-fw"></i>
+            加载更多&hellip;
+          </button>
+        </template>
+        <div class="card-body" v-else v-cloak>（无内容）</div>
+      </div>
+      <div class="card" id="archive-list">
+        <h5 class="card-header">归档<span class="badge badge-pill badge-dark" v-text="count"></span></h5>
+        <template v-if="items.length">
+          <ul class="list-group list-group-flush">
+            <li class="list-group-item list-group-item-action" v-for="item in items">
+              <a class="clearfix" :href="'/post?category=' + item.id">
+                <span class="float-left" v-text="item.name"></span>
+                <span class="float-right badge badge-pill badge-secondary" v-text="item.posts"></span>
+              </a>
+            </li>
+          </ul>
+          <button class="card-footer btn btn-link text-left" :disabled="loading" @click.stop="loadMore"
+                  v-if="items.length < count" v-cloak>
+            <i class="fas fa-sync fa-spin fa-fw"></i>
+            加载更多&hellip;
+          </button>
+        </template>
+        <div class="card-body" v-else v-cloak>（无内容）</div>
+      </div>
+    </aside>
+  </div>
+</main>
+<footer id="footer">
+  <div class="container text-muted">
+    <span>&copy; WPArts 2018</span>
+    &nbsp;
+    <i class="fas fa-envelope" aria-hidden="true"></i>
+    <a href="#" th:href="@{/concat}">联系</a>
+    &nbsp;
+    <i class="fab fa-github" aria-hidden="true"></i>
+    <a href="https://github.com/phylame/">GitHub</a>
+  </div>
+</footer>
+<script src="https://code.jquery.com/jquery-3.3.1.min.js"
+        th:src="@{/asset/jquery/jquery.min.js}"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.bundle.min.js"
+        th:src="@{/asset/bootstrap/js/bootstrap.bundle.min.js}"></script>
+<script src="https://use.fontawesome.com/releases/v5.0.6/js/all.js"
+        th:src="@{/asset/font-awesome/svg-with-js/js/fontawesome-all.js}"></script>
+<script src="https://cdn.jsdelivr.net/npm/vue" th:src="@{/asset/vue/vue.min.js}"></script>
+<script src="../../static/js/post.js" th:src="@{/js/post.js}"></script>
 </body>
 </html>
