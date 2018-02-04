@@ -1,9 +1,9 @@
 <!doctype html>
-<html lang="zh-cmn-Hans">
+<html lang="zh-cmn-Hans" xmlns:th="http://www.thymeleaf.org">
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-  <link rel="stylesheet" href="https://cdn.bootcss.com/bootstrap/4.0.0/css/bootstrap.min.css">
+  <link rel="stylesheet" th:href="@{/asset/bootstrap/css/bootstrap.min.css}">
   <title>Page not found &middot; WParts</title>
 </head>
 <body>
@@ -11,8 +11,7 @@
 <p>The page for &quot;[[${path}]]&quot; is not found.</p>
 <hr/>
 <p>Copyright &copy; WParts 2018</p>
-<script src="https://cdn.bootcss.com/jquery/3.2.1/jquery.slim.min.js"></script>
-<script src="https://cdn.bootcss.com/popper.js/1.12.9/umd/popper.min.js"></script>
-<script src="https://cdn.bootcss.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+<script th:src="@{/asset/jquery/jquery.min.js}"></script>
+<script th:src="@{/asset/bootstrap/js/bootstrap.bundle.min.js}"></script>
 </body>
 </html>

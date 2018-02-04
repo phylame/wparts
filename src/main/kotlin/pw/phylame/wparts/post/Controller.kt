@@ -6,6 +6,7 @@ import org.springframework.stereotype.Controller
 import org.springframework.ui.Model
 import org.springframework.ui.set
 import org.springframework.web.bind.annotation.*
+import pw.phylame.wparts.data.Post
 
 @Controller
 @RequestMapping("post")
@@ -29,7 +30,8 @@ class PostController {
 
     @GetMapping("{postId}")
     fun view(model: Model, @PathVariable postId: Int): String {
-        model["post"] = postService.getPostById(postId)
+        val post: Post = postService.getPostById(postId)
+        model["post"] = post
         return "post/view"
     }
 }

@@ -4,14 +4,10 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
   <link rel="stylesheet" th:href="@{/asset/bootstrap/css/bootstrap.min.css}">
-  <title>Server Error &middot; WParts</title>
+  <title>#[[$Title$]]#</title>
 </head>
 <body>
-<h3>[[${status}]] &ndash; [[${error}]]</h3>
-<p>Unexpected error for &quot;[[${path}]]&quot; at [[${#dates.format(timestamp,'yyyy-M-d H:mm:ss')}]]</p>
-<p>[[${message}]]</p>
-<hr/>
-<p>Copyright &copy; WParts 2018</p>
+#[[$END$]]#
 <script th:src="@{/asset/jquery/jquery.min.js}"></script>
 <script th:src="@{/asset/bootstrap/js/bootstrap.bundle.min.js}"></script>
 </body>
