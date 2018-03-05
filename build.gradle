@@ -1,15 +1,14 @@
 buildscript {
     ext {
-        kotlinVersion = '1.2.21'
-        springBootVersion = '2.0.0.RC1'
+        kotlinVersion = '1.2.30'
+        springBootVersion = '2.0.0.RELEASE'
     }
     repositories {
         jcenter()
-        maven { url 'https://repo.spring.io/snapshot' }
-        maven { url 'https://repo.spring.io/milestone' }
+        mavenCentral()
     }
     dependencies {
-        classpath "org.springframework.boot:spring-boot-gradle-plugin:${springBootVersion}"
+        classpath "org.springframework.boot:spring-boot-gradle-plugin:$springBootVersion"
         classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlinVersion"
         classpath "org.jetbrains.kotlin:kotlin-allopen:$kotlinVersion"
         classpath "org.jetbrains.kotlin:kotlin-noarg:$kotlinVersion"
@@ -17,25 +16,31 @@ buildscript {
 }
 
 apply plugin: 'kotlin'
-apply plugin: 'kotlin-spring'
 apply plugin: 'kotlin-jpa'
+apply plugin: 'kotlin-spring'
 apply plugin: 'org.springframework.boot'
 apply plugin: 'io.spring.dependency-management'
 
-group = 'pw.phylame.wparts'
 version = '0.0.1-SNAPSHOT'
+group = 'pw.phylame.wparts'
+description = 'WPArts, my personal site app'
 
 compileKotlin {
-    kotlinOptions.jvmTarget = "1.8"
+    kotlinOptions {
+        freeCompilerArgs = ['-Xjsr305=strict']
+        jvmTarget = '1.8'
+    }
 }
 compileTestKotlin {
-    kotlinOptions.jvmTarget = "1.8"
+    kotlinOptions {
+        freeCompilerArgs = ['-Xjsr305=strict']
+        jvmTarget = '1.8'
+    }
 }
 
 repositories {
     jcenter()
-    maven { url 'https://repo.spring.io/snapshot' }
-    maven { url 'https://repo.spring.io/milestone' }
+    mavenCentral()
 }
 
 dependencies {
@@ -43,6 +48,7 @@ dependencies {
     compile 'com.fasterxml.jackson.module:jackson-module-kotlin'
 
     runtime 'org.springframework.boot:spring-boot-devtools'
+    compile 'org.springframework.boot:spring-boot-starter-actuator'
 
     compile 'org.hibernate:hibernate-ehcache'
     compile 'org.mariadb.jdbc:mariadb-java-client'
@@ -53,7 +59,7 @@ dependencies {
     compile 'org.springframework.boot:spring-boot-starter-web'
     compile 'org.springframework.boot:spring-boot-starter-thymeleaf'
 
-    compile 'org.webjars:webjars-locator'
+    compile 'org.webjars:webjars-locator-core'
 
     compile 'org.webjars:vue:2.5.13'
     compile 'org.webjars:bootstrap:4.0.0'
